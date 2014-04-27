@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+pre {
+	display:inline;
+}
+.cb0 {background-color:#000000;}
+.cb1 {background-color:#cd0000;}
+.cb2 {background-color:#00cd00;}
+.cb3 {background-color:#cdcd00;}
+.cb4 {background-color:#0000ee;}
+.cb5 {background-color:#7f3300;}
+.cb6 {background-color:#00cdcd;}
+.cb7 {background-color:#e5e5e5;}
+.cf0 {color:#000000;}
+.cf1 {color:#cd0000;}
+.cf2 {color:#00cd00;}
+.cf3 {color:#cdcd00;}
+.cf4 {color:#0000ee;}
+.cf5 {color:#7f3300;}
+.cf6 {color:#00cdcd;}
+.cf7 {color:#e5e5e5;}
+.consoleContainer
+{
+	text-align:center;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+.consoleBorder
+{
+	display:inline-block; 
+	border:12px solid gray;
+}
+.consoleClass
+{
+	text-align:left;
+	color:white;
+	background-color:black;
+	display:inline-block;
+	border: 0px none;
+	font-family: Lucidia Console,monospace;
+	font-weight: bold;
+	font-size: 14px;
+	line-height:16px;
+	cursor:default;
+}
+.fontWidthTestClass
+{
+	position: absolute;
+	visibility: hidden;
+	height: auto;
+	width: auto;
+	font-family: Lucidia Console,monospace;
+	font-weight: bold;
+	font-size: 14px;
+	line-height:16px;
+	
+}
+body
+{
+	background-image: url('backgroundTile.png');
+	background-repeat: repeat;
+	text-align:center;
+	font-family: Lucidia Console,monospace;
+	font-size: 16px;
+	color: #ffffff;
+}
+</style>
+</head>
+
+<body>
+<span id="fontWidthTest" class="fontWidthTestClass">.</span>
+<div class="consoleContainer" id="consoleContainerInstance"><div class="consoleBorder" onmousedown='return false;'>
+<span id="console" class="consoleClass"
+	onselectstart='return false;'
+	unselectable='on'
+	onmousedown='return false;'
+	onselect='return false;'>
+Downloading...
+</span></div></div>
+<br />
+[^][v][&lt;][&gt;] - Movement<br />
+[Space] - Fire<br />
+[1]-[5] - Switch Elementity<br />
+[Enter] - Menu<br />
+[H] - Open/Close Encyclopedia<br />
+<script type='text/javascript'>
+var Module = {
+	noExitRuntime : true,
+        preRun: [],
+        postRun: [],
+        print: (function() {
+          return function(text) {
+            text = Array.prototype.slice.call(arguments).join(' ');
+            console.log(text);
+          };
+        })(),
+        printErr: function(text) {
+          text = Array.prototype.slice.call(arguments).join(' ');
+	  var element=document.getElementById('errorOutput');
+          console.log(text);
+        },
+        canvas: document.getElementById("consoleContainerInstance"),
+        setStatus: function(text) {
+          document.getElementById("console").innerHTML=text;
+        },
+        totalDependencies: 0,
+        monitorRunDependencies: function(left) {
+          this.totalDependencies = Math.max(this.totalDependencies, left);
+          Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+        }
+      };
+      Module.setStatus('Downloading...');
+</script>
+<script async type="text/javascript" src="index.js"></script>
+</body>
+
+</html>
