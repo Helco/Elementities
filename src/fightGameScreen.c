@@ -147,7 +147,9 @@ void fightGameScreen_moveEnemy () {
 	if (!noChange && 3*game.curArenaWorld.enemyElementity->hp < game.curArenaWorld.enemyElementity->stats[STAT_MAX_HP] &&
 		rand()%30 ==0 ) {
 			game.curArenaWorld.lastEnemyChangeTick = game.ticks;
-			game.curArenaWorld.nextEnemyIndex = rand()%game.curEnemy->elementityCount;
+			do {
+				game.curArenaWorld.nextEnemyIndex = rand()%game.curEnemy->elementityCount;
+			} while (game.curEnemy->elementities[game.curArenaWorld.nextEnemyIndex].hp == 0);
 	}
 	game.needRedraw = ASCII_TRUE;
 }
@@ -217,11 +219,13 @@ void fightGameScreen_update (void) {
 		fightGameScreen_moveEnemy ();
 		game.curArenaWorld.lastEnemyWalkTick = game.ticks;
 	}
-	if (game.curArenaWorld.isPlayerShooting && game.ticks-game.curArenaWorld.lastPlayerAttackTick > playerAttackTicks) {
+	if (game.curArenaWorld.isPlayerShooting && game.ticks-game.curArenaWorld.lastPlayerAttackTick > playerAttackTicks &&
+		game.curArenaWorld.playerElementity->hp > 0) {
 		game.curArenaWorld.lastPlayerAttackTick = game.ticks;
 		fightGameScreen_spawnProjectile (ASCII_TRUE);
 	}
-	if (game.curArenaWorld.isEnemyShooting && game.ticks-game.curArenaWorld.lastEnemyAttackTick > enemyAttackTicks) {
+	if (game.curArenaWorld.isEnemyShooting && game.ticks-game.curArenaWorld.lastEnemyAttackTick > enemyAttackTicks &&
+		game.curArenaWorld.enemyElementity->hp > 0) {
 		game.curArenaWorld.lastEnemyAttackTick = game.ticks;
 		fightGameScreen_spawnProjectile (ASCII_FALSE);
 	}
